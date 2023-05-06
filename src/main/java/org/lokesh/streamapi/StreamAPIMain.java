@@ -1,8 +1,11 @@
 package org.lokesh.streamapi;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class StreamAPIMain {
     public static void main(String[] args) {
@@ -21,7 +24,7 @@ public class StreamAPIMain {
                         employee.getLastName(), employee.getSalary() *1.10,employee.getProjects()))
                 .collect(Collectors.toList());
 
-        System.out.println("Increased Sal "+ increasedSal);
+        System.out.println("collect "+ increasedSal);
 
         //filter
 
@@ -31,17 +34,63 @@ public class StreamAPIMain {
                         employee.getLastName(), employee.getSalary() + 1000.0, employee.getProjects()))
                 .collect(Collectors.toList());
 
-        System.out.println("Increased Sal "+ salIncreasedCondtion);
+        System.out.println("filter "+ salIncreasedCondtion);
 
         //findfirst
 
-        Employee employee1 = employeeList.stream()
+        Employee firstEmployee = employeeList.stream()
                 .filter(employee -> employee.getSalary() > 5000)
                 .map(employee -> new Employee(employee.getFirstName(), employee.getLastName(), employee.getSalary() * 2.10, employee.getProjects()))
                 .findFirst()
                 .orElse(null);
 
-        System.out.println("Lokesh "+employee1);
+        System.out.println("findfirst "+firstEmployee);
+
+        //flatMap
+
+        String flatString = employeeList.stream()
+                .map(employee -> employee.getProjects())
+                .flatMap(strings -> strings.stream())
+                .collect(Collectors.joining(","));
+
+        System.out.println("flatmap " + flatString);
+
+        //Short Circuit Operations
+
+        List<Employee> shortCicuit = employeeList.stream()
+                .skip(1)
+                .limit(1)
+                .collect(Collectors.toList());
+
+        System.out.printf("shortCicuit " + shortCicuit);
+
+        //finit data
+        Stream.generate(Math::random)
+                .limit(5)
+                .forEach(value -> System.out.println(value));
+
+        //sort
+        List<Employee> sortedEmployees = employeeList.stream()
+                .sorted((o1, o2) -> o1.getFirstName().compareToIgnoreCase(o2.getFirstName()))
+                .collect(Collectors.toList());
+
+        System.out.println("sortedEmployees " + sortedEmployees);
+
+        //max operator
+
+        Employee maxSalary = employeeList.stream()
+                .max(Comparator.comparing(Employee::getSalary))
+                .orElseThrow(NoSuchElementException::new);
+
+        System.out.println("maxSalary "+maxSalary);
+
+        //reduce
+
+        Double totalSal = employeeList.stream()
+                .map(employee -> employee.getSalary())
+                .reduce(0.0,Double::sum);
+
+        System.out.println("Total Salary "+totalSal);
     }
 
     public List<Employee> getEmployee() {

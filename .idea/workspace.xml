@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e579023d-2539-49ba-b341-0ae52962621b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/lokesh/streamapi/Employee.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/lokesh/streamapi/StreamAPIMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lokesh/streamapi/StreamAPIMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lokesh/streamapi/StreamAPIMain.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
